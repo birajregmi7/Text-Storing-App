@@ -1,0 +1,35 @@
+<% layout('/layouts/boilerplate') %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h1 class="display-4 mb-4">Texting App</h1>
+      <form action="/posts/new" method="get">
+        <button type="submit" class="btn btn-success btn-lg">
+          Add New Message
+        </button>
+      </form>
+      <% if(alltexts && alltexts.length) { %> <% for (let data of alltexts) { %>
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="card-title">By random</h5>
+          <p class="card-text"><%=data.message %></p>
+          <p><%= data.createdAt %></p>
+          <form action="/posts/<%=data.id %>" method="GET">
+            <button>Edit</button>
+          </form>
+          <br />
+          <form action="/posts/<%=data.id %>?_method=DELETE" method="POST">
+            <button class="btn btn-success">Delete</button>
+          </form>
+        </div>
+      </div>
+      <% } %> <% } else { %>
+      <div class="card mt-2">
+        <div class="card-body">
+          <h5 class="card-title">No yet please add some</h5>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
